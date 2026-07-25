@@ -324,7 +324,7 @@
 
     // Create/append CHATGPT entry
     const [activeTab] = await chrome.tabs.query({ active: true, currentWindow: true }),
-          chatgptURL = chrome.runtime.getManifest().content_scripts[0].matches.map(url => url.replace(/\/\*$/, ''))
+           chatgptURL = chrome.runtime.getManifest().content_scripts[0].matches.map(url => url.replace(/\/\*$/, ''))
     if (!activeTab.url.includes(chatgptURL))
         footer.before(createMenuEntry({
             key: 'chatgptEntry', type: 'link', symbol: '🤖', url: chatgptURL, helptip: chatgptURL,
