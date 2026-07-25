@@ -18,7 +18,7 @@
 <a href="./LICENSE.md">
     <img alt="[许可证: MIT]" src="https://img.shields.io/badge/%E8%AE%B8%E5%8F%AF%E8%AF%81-MIT-orange.svg?logo=internetarchive&logoColor=white&labelColor=464646&style=for-the-badge"></a>
 <a href="https://github.com/adamlui/chatgpt-auto-continue/blob/main/greasemonkey/chatgpt-auto-continue.user.js">
-    <img height=32 src="https://img.shields.io/github/size/adamlui/chatgpt-auto-continue/greasemonkey/chatgpt-auto-continue.user.js?label=%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F&logo=databricks&logoColor=white&labelColor=464646&color=ff69b4&style=for-the-badge"></a>
+    <img src="https://img.shields.io/github/size/adamlui/chatgpt-auto-continue/greasemonkey/chatgpt-auto-continue.user.js?label=%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F&logo=databricks&logoColor=white&labelColor=464646&color=ff69b4&style=for-the-badge"></a>
 <a href="https://www.codefactor.io/repository/github/adamlui/chatgpt-auto-continue">
     <img alt="[CodeFactor 等级]" src="https://img.shields.io/codefactor/grade/github/adamlui/chatgpt-auto-continue?label=%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F&logo=codefactor&logoColor=white&labelColor=464646&color=b3ff68&style=for-the-badge"></a>
 <a href="https://github.com/KudoAI/chatgpt.js?utm_source=chatgpt_auto_continue&utm_content=github_shield">
