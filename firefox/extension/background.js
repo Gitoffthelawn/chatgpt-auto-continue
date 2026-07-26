@@ -9,8 +9,10 @@ const chatgptURL = 'https://chatgpt.com'
     app.urls = { resourceHost: `https://cdn.jsdelivr.net/gh/adamlui/chatgpt-auto-continue@${app.commitHashes.app}` }
     const remoteAppData = await (await fetch(`${app.urls.resourceHost}/assets/data/app.json`)).json()
     Object.assign(app, { ...remoteAppData, urls: { ...app.urls, ...remoteAppData.urls }})
-    app.sourceWebStore = navigator.userAgent.includes('Firefox') ? 'firefox'
-        : (await chrome.management.getSelf()).updateUrl?.includes('google.com') ? 'chrome' : 'edge'
+    app.sourceWebStore =
+        navigator.userAgent.includes('Firefox') ? 'firefox'
+      : (await chrome.management.getSelf()).updateUrl?.includes('google.com') ? 'chrome'
+      : 'edge'
     chrome.storage.local.set({ app }) // save to browser storage
     chrome.runtime.setUninstallURL(app.urls.uninstall)
 })()
@@ -34,7 +36,9 @@ chrome.runtime.onMessage.addListener(async ({ action }) => {
         if (activeTab != chatgptTab) await new Promise(resolve => // after new tab loads
             chrome.tabs.onUpdated.addListener(function loadedListener(tabId, { status }) {
                 if (tabId == chatgptTab.id && status == 'complete') {
-                    chrome.tabs.onUpdated.removeListener(loadedListener) ; setTimeout(resolve, 1500) }
+                    chrome.tabs.onUpdated.removeListener(loadedListener)
+                    setTimeout(resolve, 1500)
+                }
             })
         )
         chrome.tabs.sendMessage(chatgptTab.id, { action: 'showAbout' })
