@@ -28,7 +28,7 @@
     const cachePaths = { root: '.cache' }
     cachePaths.bumpUtils = path.join(__dirname, `${cachePaths.root}/bump.min.mjs`)
 
-    // Import BUMP UTILS
+    // Import bump.mjs
     fs.mkdirSync(path.dirname(cachePaths.bumpUtils), { recursive: true })
     const bumpUtilsContent = await (await fetch(
         'https://cdn.jsdelivr.net/gh/adamlui/ai-web-extensions@f63b650/utils/bump/lib/bump.min.mjs')).text()
@@ -36,7 +36,9 @@
             'fea2efd9d2bf02cae89e7fa7c2385a4a0910db93236543394cb087b6884b89c7')
         throw new Error('Integrity check failed: unexpected content in bump.min.mjs')
     fs.writeFileSync(cachePaths.bumpUtils, bumpUtilsContent)
-    const bump = await import(`file://${cachePaths.bumpUtils}`) ; fs.unlinkSync(cachePaths.bumpUtils)
+    const bump = await import(`file://${cachePaths.bumpUtils}`)
+    fs.unlinkSync(cachePaths.bumpUtils)
+    const { initKudoSyncBot } = bump
 
     // Init manifest PATHS
     const chromiumManifestPath = 'chromium/extension/manifest.json',
@@ -89,8 +91,9 @@
         // git add/commit/push
         try {
             execSync('git add ./**/manifest.json')
-            bump.initKudoSyncBot()
-            spawnSync('git', ['commit', '-n', '-m', commitMsg], { stdio: 'inherit', encoding: 'utf-8' })
+            spawnSync('git', [
+                '-c', `user.signingkey=${initKudoSyncBot()}`, 'commit', '-n', '-m', commitMsg
+            ], { stdio: 'inherit', encoding: 'utf-8' })
             console.log('') // line break
             if (!config.noPush) {
                 bump.log.working('\nPulling latest changes from remote to sync local repository...\n')
