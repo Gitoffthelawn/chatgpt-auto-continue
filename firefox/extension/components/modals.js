@@ -54,8 +54,8 @@ window.modals = {
         // Hack buttons
         aboutModal.querySelector('.modal-buttons').style.justifyContent = 'center'
         aboutModal.querySelectorAll('button').forEach(btn => {
-            btn.style.cssText = 'min-width: 136px ; text-align: center ;'
-                + `height: ${ this.runtime == 'greasemonkey' ? 58 : 55 }px`
+            btn.style.cssText =
+                `min-width: 136px ; text-align: center ; height: ${ this.runtime == 'greasemonkey' ? 58 : 55 }px`
 
             // Replace link buttons w/ clones that don't dismiss modal
             if (/support|extensions/i.test(btn.textContent)) {
