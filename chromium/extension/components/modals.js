@@ -134,19 +134,20 @@ window.modals = {
 
     observeRemoval(modal, modalType, modalSubType) { // to maintain stack for proper nav
         const modalBG = modal.parentNode
-        new MutationObserver(([mutation], obs) => {
-            mutation.removedNodes.forEach(removedNode => { if (removedNode == modalBG) {
-                if (this.stack[0].includes(modalSubType || modalType)) { // new modal not launched so nav back
-                    this.stack.shift() // remove this modal type from stack 1st
-                    const prevModalType = this.stack[0]
+        new MutationObserver(([mutation], obs) =>
+            mutation.removedNodes.forEach(removedNode => {
+                if (removedNode != modalBG) return
+                if (modals.stack[0].includes(modalSubType || modalType)) { // new modal not launched so nav back
+                    modals.stack.shift() // remove this modal type from stack 1st
+                    const prevModalType = modals.stack[0]
                     if (prevModalType) { // open it
-                        this.stack.shift() // remove type from stack since re-added on open
-                        this.open(prevModalType)
+                        modals.stack.shift() // remove type from stack since re-added on open
+                        modals.open(prevModalType)
                     }
                 }
                 obs.disconnect()
-            }})
-        }).observe(modalBG.parentNode, { childList: true, subtree: true })
+            })
+        ).observe(modalBG.parentNode, { childList: true, subtree: true })
     },
 
     open(modalType, modalSubType) {
