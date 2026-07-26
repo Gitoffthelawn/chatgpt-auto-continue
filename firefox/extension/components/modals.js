@@ -7,8 +7,8 @@ window.modals = {
 
     get runtime() {
         return typeof GM_info != 'undefined' ? 'greasemonkey'
-            : navigator.userAgent.includes('Firefox') ? 'firefox'
-            : 'chromium'
+             : navigator.userAgent.includes('Firefox') ? 'firefox'
+             : 'chromium'
     },
 
     about() { // requires lib/i18n.js + <app|env>
@@ -36,7 +36,7 @@ window.modals = {
                 + `<span class="about-em">${app.version}</span>\n`
             + `<span style="${labelStyles}">📜 ${i18n.getMsg('about_openSourceCode')}:</span> `
                 + `<a href="${app.urls.github}" target="_blank" rel="nopener">`
-                    + app.urls.github + '</a>\n'
+                    + `${app.urls.github}</a>\n`
             + `<span style="${labelStyles}">🚀 ${i18n.getMsg('about_latestChanges')}:</span> `
                 + `<a href="${app.urls.github}/commits/main/${this.runtime}" target="_blank" rel="nopener">`
                     + `${app.urls.github}/commits/main/${this.runtime}</a>\n`
@@ -46,10 +46,10 @@ window.modals = {
         )
 
         // Format text
-        aboutModal.querySelector('h2').style.cssText = `
-            text-align: center ; font-size: 51px ; line-height: 46px ; padding: 15px 0`
-        aboutModal.querySelector('p').style.cssText = `
-            text-align: center ; overflow-wrap: anywhere ; margin: ${ isCompact ? '6px 0 -16px' : '3px 0 29px' }`
+        aboutModal.querySelector('h2').style.cssText =
+            `text-align: center ; font-size: 51px ; line-height: 46px ; padding: 15px 0`
+        aboutModal.querySelector('p').style.cssText =
+            `text-align: center ; overflow-wrap: anywhere ; margin: ${ isCompact ? '6px 0 -16px' : '3px 0 29px' }`
 
         // Hack buttons
         aboutModal.querySelector('.modal-buttons').style.justifyContent = 'center'
@@ -107,7 +107,7 @@ window.modals = {
 
         // Hack buttons
         feedbackModal.querySelectorAll('button').forEach((btn, idx) => {
-            if (idx == 0) btn.style.display = 'none' // hide Dismiss button
+            if (idx === 0) btn.style.display = 'none' // hide Dismiss button
 
             // Replace buttons w/ clones that don't dismiss modal
             btn.replaceWith(btn = btn.cloneNode(true))
@@ -124,7 +124,8 @@ window.modals = {
 
     init(modal) { // requires lib/css.js
         this.stylize()
-        modal.classList.add(this.class) ; modal.parentNode.classList.add(`${this.class}-bg`)
+        modal.classList.add(this.class)
+        modal.parentNode.classList.add(`${this.class}-bg`)
         css.addRisingParticles(modal)
         setTimeout(() => { // dim bg
             modal.parentNode.style.backgroundColor = `rgba(67,70,72, ${ env.ui.scheme == 'dark' ? 0.62 : 0.33 })`
@@ -136,7 +137,7 @@ window.modals = {
         const modalBG = modal.parentNode
         new MutationObserver(([mutation], obs) =>
             mutation.removedNodes.forEach(removedNode => {
-                if (removedNode != modalBG) return
+                if (removedNode !== modalBG) return
                 if (modals.stack[0].includes(modalSubType || modalType)) { // new modal not launched so nav back
                     modals.stack.shift() // remove this modal type from stack 1st
                     const prevModalType = modals.stack[0]
