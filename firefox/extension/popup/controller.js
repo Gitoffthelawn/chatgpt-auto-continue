@@ -134,8 +134,8 @@
             for (const [ctrlKey, ctrlData] of Object.entries({ ...settings.categories, ...settings.controls }))
                 if (Object.values(ctrlData.dependencies || {}).flat().includes(entryData.key)) {
                     const depDiv = document.querySelector(`div#${ctrlKey}`) ; if (!depDiv) continue
-                    const ctgChildren = depDiv.closest('.categorized-entries').querySelectorAll('.menu-entry'),
-                          toDisable = !settings.typeIsEnabled(entryData.key)
+                    const ctgChildren = depDiv.closest('.categorized-entries').querySelectorAll('.menu-entry')
+                    const toDisable = !settings.typeIsEnabled(entryData.key)
                     requestAnimationFrame(() => Object.assign(depDiv.closest('.categorized-entries').style, {
                         height: `${dom.get.computedHeight(ctgChildren)}px`,
                         transition: env.browser.isFF || toDisable ? '' : 'height 0.25s'
@@ -181,8 +181,8 @@
             // Toolbar icon
             chrome.action.setIcon({ path: Object.fromEntries(
                 Object.keys(chrome.runtime.getManifest().icons).map(dimension =>
-                    [dimension, `../icons/${ app.config.extensionDisabled ? 'faded/' : '' }icon${dimension}.png`]
-            ))})
+                    [dimension, `../icons/${ app.config.extensionDisabled ? 'faded/' : '' }icon${dimension}.png`])
+            )})
 
             // Menu elems
             document.querySelectorAll('.logo, .menu-title, .menu-entry, .slider, .categorized-entries')
@@ -212,7 +212,7 @@
               caret = ctgDiv.querySelector('.menu-caret'),
               ctgChildrenDiv = ctgDiv.nextElementSibling,
               ctgChild = ctgChildrenDiv.querySelectorAll('.menu-entry')
-        if (action != 'hide' && dom.get.computedHeight(ctgChildrenDiv) == 0) { // show category settings
+        if (action != 'hide' && dom.get.computedHeight(ctgChildrenDiv) === 0) { // show category settings
             ctgDiv.classList.toggle('expanded', true)
             Object.assign(ctgChildrenDiv.style, { height: `${dom.get.computedHeight(ctgChild)}px`,
                 transition: transitions && !env.browser.isFF ? 'height 0.25s' : '' })
