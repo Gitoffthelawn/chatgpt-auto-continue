@@ -31,7 +31,7 @@
     // Import bump.mjs
     fs.mkdirSync(path.dirname(cachePaths.bumpUtils), { recursive: true })
     const bumpUtilsContent = await (await fetch(
-        'https://cdn.jsdelivr.net/gh/adamlui/ai-web-extensions@f63b650/utils/bump/lib/bump.min.mjs')).text()
+        'https://cdn.jsdelivr.net/gh/adamlui/ai-web-extensions@d0314e4/utils/bump/lib/bump.min.mjs')).text()
     if (createHash('sha256').update(bumpUtilsContent).digest('hex') !==
             'fea2efd9d2bf02cae89e7fa7c2385a4a0910db93236543394cb087b6884b89c7')
         throw new Error('Integrity check failed: unexpected content in bump.min.mjs')
