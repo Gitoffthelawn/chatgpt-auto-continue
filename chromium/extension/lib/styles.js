@@ -2,17 +2,17 @@
 
 window.styles = {
 
-    update({ key, keys, autoAppend }) { // requires lib/dom.js
+    update({ key, keys, append }) { // requires lib/dom.js
         if (!key && !keys) return console.error('Option \'key\' or \'keys\' required by styles.update()')
         ;[].concat(keys || key).forEach(key => {
             const style = this[key] ; style.node ||= dom.create.style()
-            if ((autoAppend ?? style.autoAppend) && !style.node.isConnected) document.head.append(style.node)
+            if ((append ?? style.append) && !style.node.isConnected) document.head.append(style.node)
             style.node.textContent = style.css
         })
     },
 
     toast: {
-        autoAppend: true,
+        append: true,
         get css() { // requires <app|env>
             return !app.config.toastMode ? '' : // flatten notifs into toast alerts
                 `div.${app.slug}.chatgpt-notif {
