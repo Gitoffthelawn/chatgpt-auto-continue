@@ -5,9 +5,9 @@ window.styles = {
     update({ key, keys, append }) { // requires lib/dom.js
         if (!key && !keys) return console.error('Option \'key\' or \'keys\' required by styles.update()')
         ;[].concat(keys || key).forEach(key => {
-            const style = this[key] ; style.node ||= dom.create.style()
+            const style = this[key]
+            ;(style.node ||= dom.create.style()).textContent = style.css
             if ((append ?? style.append) && !style.node.isConnected) document.head.append(style.node)
-            style.node.textContent = style.css
         })
     },
 
