@@ -4,13 +4,13 @@
   "description": "Automatically continue generating answers when ChatGPT responses get cut-off",
   "author": {
     "name": "Adam Lui",
-    "email": "adam@kudoai.com",
+    "email": "adam@kudoai.org",
     "url": "https://github.com/adamlui"
   },
   "homepage": "https://github.com/adamlui/chatgpt-auto-continue/#readme",
   "bugs": {
     "url": "https://github.com/adamlui/chatgpt-auto-continue/issues",
-    "email": "adam@kudoai.com"
+    "email": "adam@kudoai.org"
   },
   "license": "MIT",
   "funding": [
